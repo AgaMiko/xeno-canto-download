@@ -10,7 +10,7 @@
 # Karoliina Oksanen, 2014
 # Updated to python 3.7.4, Agnieszka Mikolajczyk, 2019
 
-import urllib.request
+import urllib.request, json
 import sys
 import re
 import os
@@ -22,10 +22,10 @@ def read_numbers(searchTerms):
     i = 1 # page number
     numbers = []
     while True:
-        page = urllib.request.urlopen('https://xeno-canto.org/explore?pg={0}&query={1}'.format(i,
+        soundPage = urllib.request.urlopen('https://xeno-canto.org/explore?pg={0}&query={1}'.format(i,
             '+'.join(searchTerms)))
-        newResults = re.findall(r"/(\d+)/download", page.read().decode('utf-8'))
-        print(newResults)
+
+        newResults = re.findall(r"/(\d+)/download", soundPage.read().decode('utf-8'))
         if(len(newResults) > 0):
             numbers.extend(newResults)
         # check if there are more than 1 page of results (30 results per page)
@@ -36,6 +36,13 @@ def read_numbers(searchTerms):
 
     return numbers
 
+def read_json(searchTerms)
+    jsonPage = urllib.request.urlopen('https://www.xeno-canto.org/api/2/recordings?query={0}'.
+                                      format('+'.join(searchTerms)))
+    jsondata = json.loads(jsonPage.read().decode('utf-8'))
+    with open('data/jsondata.txt', 'w') as outfile:
+        json.dump(jsondata, outfile)
+    print(jsondata)
 # returns the filenames for all Xeno Canto bird sound files found with the given
 # search terms.
 # @param searchTerms: list of search terms
@@ -64,6 +71,7 @@ def download(searchTerms):
     if not os.path.exists("data/xeno-canto-dataset"):
         print("Creating subdirectory \"data/xeno-canto-dataset\" for downloaded files...")
         os.makedirs("data/xeno-canto-dataset")
+    read_json(searchTerms)
     filenames = read_filenames(searchTerms)
     if len(filenames) == 0:
         print("No search results.")
