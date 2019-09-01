@@ -23,7 +23,6 @@ import os
 
 # Creates the subdirectory data/xeno-canto-dataset if necessary
 # Downloads and saves json files for number of pages in a query
-# returns number of files on the last page
 # and directory path to saved json's
 def save_json(searchTerms):
     numPages=1
@@ -50,12 +49,12 @@ def save_json(searchTerms):
     # return number of files in json
     # each page contains 500 results, the last page can have less than 500 records
     print("Saved json for ", (numPages - 1) * 500 + len(jsondata['recordings']), " files")
-    return len(jsondata['recordings']), path
+    return path
 
 # reads the json and return the list of values for selected json part
 # i.e. "id" - ID number, "type": type of the bird sound such as call or song
 # for all Xeno Canto files found with the given search terms.
-def read_data(max, searchTerm, path):
+def read_data(searchTerm, path):
     data = []
     numPages=1
     page=1
@@ -68,12 +67,8 @@ def read_data(max, searchTerm, path):
         # check number of pages
         numPages = jsondata['numPages']
         # find "recordings" in a json and save a list with a search term
-        if page < numPages:
-            for k in range(499):
-                data.append(jsondata["recordings"][k][searchTerm])
-        else:
-            for k in range(max-1):
-                data.append(jsondata["recordings"][k][searchTerm])
+        for k in range(len(jsondata['recordings'])):
+            data.append(jsondata["recordings"][k][searchTerm])
         page=page+1
     return data
 
@@ -83,23 +78,23 @@ def read_data(max, searchTerm, path):
 # filename have two parts: the name of the bird in latin and ID number
 def download(searchTerms):
     # create data/xeno-canto-dataset directory
-    maxRec, path = save_json(searchTerms)
+    path = save_json(searchTerms)
     # get filenames: recording ID and bird name in latin from json
-    filenamesID = read_data(maxRec,'id', path)
-    filenamesGen = read_data(maxRec, 'gen', path)
+    filenamesID = read_data('id', path)
+    filenamesGen = read_data('gen', path)
     # get website recording http download address from json
-    fileaddress = read_data(maxRec,'file', path)
+    fileaddress = read_data('file', path)
     numfiles=len(filenamesID)
     print("A total of ",numfiles," files will be downloaded")
     for i in range(0, numfiles-1):
-        print("Saving file ", i+1, "/", numfiles, ": " + filenamesGen[i]+filenamesID[i]+".mp3")
+        print("Saving file ", i, "/", numfiles, ": " + filenamesGen[i]+filenamesID[i]+".mp3")
         urllib.request.urlretrieve("http:"+fileaddress[i],path+"/"+filenamesGen[i]+filenamesID[i]+".mp3")
 
 
 def main(argv):
     if (len(sys.argv) < 2):
-        print("Usage: scr/data/python xcdl.py searchTerm1 searchTerm2 ... searchTermN")
-        print("Example: scr/data/python xcdl.py apus apus")
+        print("Usage: python xcdl.py searchTerm1 searchTerm2 ... searchTermN")
+        print("Example: python xcdl.py apus apus")
         return
     else:
         download(argv[1:len(argv)])
