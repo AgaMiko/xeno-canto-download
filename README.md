@@ -8,9 +8,17 @@ Script for downloading bird sound files from www.xeno-canto.org based on search 
 python xcdl.py searchTerm1 searchTerm2 ... searchTermN")
 ```
 
-## Example:
+## Examples:
+Downloading sounds under one or many search terms (i.e. one bird type)
 ```python
 python xcdl.py apus apus
+```
+downloading with multiple search term (i.e. many bird types)
+```python
+python xeno-canto-download/xcdl.py frugilegus &
+python xeno-canto-download/xcdl.py coccothraustes &
+python xeno-canto-download/xcdl.py palumbus &
+python xeno-canto-download/xcdl.py Delichon urbicum
 ```
 ## Reading json file:
 To read the data from all json files found under the *searchTerms* use *readData((searchTerm, pathToJsonCatalogue)* function
