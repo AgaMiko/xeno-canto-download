@@ -86,7 +86,7 @@ def download(searchTerms):
     fileaddress = read_data('file', path)
     numfiles=len(filenamesID)
     print("A total of ",numfiles," files will be downloaded")
-    for i in range(0, numfiles-1):
+    for i in range(0, numfiles):
         print("Saving file ", i, "/", numfiles, ": " + filenamesGen[i]+filenamesID[i]+".mp3")
         urllib.request.urlretrieve("http:"+fileaddress[i],path+"/"+filenamesGen[i]+filenamesID[i]+".mp3")
 
