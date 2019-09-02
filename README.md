@@ -5,7 +5,7 @@ Script for downloading bird sound files from www.xeno-canto.org based on search 
 
 ## Usage: 
 ```python
-python xcdl.py searchTerm1 searchTerm2 ... searchTermN")
+python xcdl.py searchTerm1 searchTerm2 ... searchTermN
 ```
 
 ## Examples:
@@ -30,7 +30,8 @@ spicies = readData("sp",path)
 
 ## Example json file
 ```json
-"id": "489414",
+{
+ "id": "489414",
  "gen": "Apus",
  "sp": "apus",
  "ssp": "",
@@ -46,6 +47,7 @@ spicies = readData("sp",path)
  "url": "https://www.xeno-canto.org/489414",
  "q": "no score",
  "time": "21:30",
- "date": "2019-07-29"}
+ "date": "2019-07-29"
+ }
  ```
  
