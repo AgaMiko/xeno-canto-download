@@ -4,6 +4,7 @@ xeno-canto-download
 Script for downloading bird sound files from www.xeno-canto.org based on search terms.
 
 ## Usage: 
+Use python to execute a program with selected search terms. Remember to change the dirctory to the foldeer containing xcdl.py file, so it can be executed.
 ```python
 python xcdl.py searchTerm1 searchTerm2 ... searchTermN
 ```
@@ -12,6 +13,11 @@ python xcdl.py searchTerm1 searchTerm2 ... searchTermN
 Downloading sounds under one or many search terms (i.e. one bird type)
 ```python
 python xcdl.py apus apus
+```
+You can also try filtering your results. For example to search for a bird "apus apus" but only in Poland and with quality of recordings  and B type this.
+For more advance search terms check [xeno-canto search tips](https://www.xeno-canto.org/help/search) website.
+```python
+python xcdl.py cnt:poland q>:C
 ```
 downloading with multiple search term (i.e. download dataset of polish bird sounds - [Women in Machine Learning Project - Bird sound recognition](https://github.com/wimlds-trojmiasto/birds))
 ```python
