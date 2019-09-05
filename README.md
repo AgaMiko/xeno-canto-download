@@ -4,7 +4,7 @@ xeno-canto-download
 Script for downloading bird sound files from www.xeno-canto.org based on search terms.
 
 ## Usage: 
-Use python to execute a program with selected search terms. Remember to change the dirctory to the foldeer containing xcdl.py file, so it can be executed.
+Use python to execute a program with selected search terms. Remember to change the dirctory to the folder containing xcdl.py file, so it can be executed.
 ```python
 python xcdl.py searchTerm1 searchTerm2 ... searchTermN
 ```
