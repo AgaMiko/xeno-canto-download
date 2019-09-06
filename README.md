@@ -17,7 +17,7 @@ python xcdl.py apus apus
 You can also try filtering your results. For example to search for a bird "apus apus" but only in Poland and with quality of recordings  and B type this.
 For more advance search terms check [xeno-canto search tips](https://www.xeno-canto.org/help/search) website.
 ```python
-python xcdl.py cnt:poland q>:C
+python xcdl.py apus apus cnt:poland q>:C
 ```
 downloading with multiple search term (i.e. download dataset of polish bird sounds - [Women in Machine Learning Project - Bird sound recognition](https://github.com/wimlds-trojmiasto/birds))
 ```python
